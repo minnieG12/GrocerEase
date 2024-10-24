@@ -1,1 +1,2 @@
-# GrocerEase-by-Asmita-Guha
+# GrocerEase
+by Asmita Guha
