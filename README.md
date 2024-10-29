@@ -1,2 +1,2 @@
 # GrocerEase
-by Asmita Guha
+by Asmita Guha, Nandini Agarwal and Arushi Pandey
