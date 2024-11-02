@@ -151,11 +151,3 @@ This project is licensed under the MIT License.
 ---
 
 This README file should help guide developers through creating, setting up, and running the GrocerEase project in IntelliJ.
-
-
-## License
-This project is licensed under the MIT License.
-
----
-
-This README file should help guide developers through creating, setting up, and running the GrocerEase project in IntelliJ.
