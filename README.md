@@ -19,6 +19,9 @@ GrocerEase/
 │   │   ├── WelcomeController.java
 │   │   ├── MainController.java
 │   │   ├── CheckoutThread.java
+│   │   ├── resources/
+│   │       ├── MainView.fxml
+│   │       └── WelcomeView.fxml
 │   ├── grocery/
 │   │   ├── Cart.java
 │   │   ├── Customer.java
@@ -82,3 +85,4 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 - JavaFX documentation
 - Scene Builder documentation
 - OpenJDK community
+
