@@ -1,16 +1,10 @@
-# GrocerEase
 
-## Overview
-GrocerEase (The Grocery Manager App) is a JavaFX-based application designed for managing a grocery store. It features an inventory management system, customer handling, and a streamlined checkout process. The app incorporates various core Java concepts, including classes, exceptions, threads, generics, and packages, to deliver a robust user experience.
+# GrocerEase - JavaFX Grocery Management Application
 
-## Features
-- Inventory management with 20+ grocery items
-- Customer information handling
-- Secure checkout process
-- Custom exception handling for various scenarios
-- Responsive UI with JavaFX
+GrocerEase is a JavaFX-based mini-project for managing grocery items, designed to demonstrate core Java concepts such as classes, inheritance, custom exceptions, threads, and JavaFX UI elements. The application includes features like inventory management, shopping cart, and exception handling for various invalid inputs (e.g., insufficient funds, out-of-stock items).
 
 ## Project Structure
+
 ```
 GrocerEase/
 ├── src/
@@ -19,9 +13,6 @@ GrocerEase/
 │   │   ├── WelcomeController.java
 │   │   ├── MainController.java
 │   │   ├── CheckoutThread.java
-│   │   ├── resources/
-│   │       ├── MainView.fxml
-│   │       └── WelcomeView.fxml
 │   ├── grocery/
 │   │   ├── Cart.java
 │   │   ├── Customer.java
@@ -37,52 +28,97 @@ GrocerEase/
 ├── .vscode/
 │   ├── launch.json
 │   ├── settings.json
-├── lib
-├── bin
+├── lib/
+├── bin/
 └── README.md
-
 ```
 
-## Technologies Used
-- **Java**: Programming language used for the application.
-- **JavaFX**: Framework for building the GUI.
-- **Scene Builder**: Visual design tool for FXML layout creation.
+## Prerequisites
+- [Java 11+](https://www.oracle.com/java/technologies/javase-downloads.html)
+- [IntelliJ IDEA](https://www.jetbrains.com/idea/download/)
+- [JavaFX SDK](https://gluonhq.com/products/javafx/) (if not bundled with IntelliJ)
 
-## Getting Started
+## Steps to Create GrocerEase in IntelliJ
 
-### Prerequisites
-- JDK 11 or higher
-- JavaFX SDK
-- Scene Builder (optional for GUI design)
+### 1. **Create the Project**
+   1. Open IntelliJ, go to **File > New > Project**.
+   2. Select **Java** or **JavaFX** as the project type.
+   3. Name the project **GrocerEase** and choose your project location.
+   4. Click **Create**.
 
-### Installation
-1. Clone the repository:
-   ```bash
-   git clone <repository-url>
-   cd GroceryManagerApp
-   ```
-2. Set up the JavaFX SDK in your IDE (e.g., IntelliJ, Eclipse, VS Code).
-3. Run `MainApp.java` to start the application.
+### 2. **Set Up JavaFX**
+   1. Download the JavaFX SDK if it’s not included in IntelliJ.
+   2. In IntelliJ, go to **File > Project Structure > Libraries**.
+   3. Click the **+** button, select **Java**, and add the path to the JavaFX SDK.
+   4. Ensure JavaFX libraries are included by adding them to your `lib` folder if needed.
 
-### Usage
-- Enter customer details on the welcome page.
-- Select items from the inventory to add to the cart.
-- Proceed to checkout and handle payment.
+### 3. **Organize Project Structure**
+   1. In the **Project Explorer** (left sidebar), right-click on **src** and select **New > Package**. 
+   2. Create the following packages:
+      - `main` (for main application files)
+      - `grocery` (for classes related to grocery items and cart functionality)
+      - `exceptions` (for custom exceptions)
+      - `resources` (for FXML files)
+   3. Right-click each package and select **New > Java Class** to create the necessary classes in each package.
 
-## Exception Handling
-The application includes custom exceptions to handle specific scenarios:
-- **InsufficientFundsException**: Thrown when a customer attempts to check out without enough balance.
-- **OutOfStockException**: Thrown when an item is out of stock during the checkout process.
-- **InvalidNameException**: Thrown when the customer name entered contains invalid characters.
+### 4. **Create Java Classes**
 
-## Contributing
-Contributions are welcome! Please feel free to submit a pull request or open an issue for suggestions and improvements.
+   - **`main` package**:
+     - `MainApp.java`: The entry point for launching the JavaFX application.
+     - `WelcomeController.java`: Controls the welcome screen view.
+     - `MainController.java`: Manages main interactions, such as adding items to the cart.
+     - `CheckoutThread.java`: Manages checkout operations using multithreading.
+
+   - **`grocery` package**:
+     - `Cart.java`: Represents a shopping cart.
+     - `Customer.java`: Represents a customer’s account.
+     - `GroceryItem.java`: Represents individual grocery items.
+     - `Inventory.java`: Manages the collection of grocery items.
+
+   - **`exceptions` package**:
+     - `InsufficientFundsException.java`: Custom exception for insufficient funds.
+     - `OutOfStockException.java`: Custom exception for out-of-stock items.
+     - `InvalidNameException.java`: Custom exception for invalid item names.
+
+### 5. **Create FXML Files**
+   1. In the `resources` folder, right-click and select **New > File**.
+   2. Create `MainView.fxml` and `WelcomeView.fxml` to define the UI structure.
+
+### 6. **Configure and Run MainApp**
+   1. Go to **Run > Edit Configurations**.
+   2. Under **Application** in the **Main class** field, set it to `main.MainApp`.
+   3. Add JavaFX VM options (replace `/path/to/javafx-sdk` with your SDK path):
+      ```
+      --module-path /path/to/javafx-sdk/lib --add-modules=javafx.controls,javafx.fxml
+      ```
+   4. Run `MainApp` to launch the application.
+
+### 7. **Add `.vscode` Folder (Optional for VS Code Users)**
+   If you’re using Visual Studio Code settings, create a `.vscode` folder and add `launch.json` and `settings.json` for configuration.
+
+### 8. **README.md**
+   - Document the project details, setup instructions, and usage information in this README file.
+
+## Example Initialization Code
+Example initialization code for `Inventory.java` (with prices in INR):
+
+```java
+public void initializeInventory() {
+    items.put("Apple", new GroceryItem("Apple", 40.0, 50));       // ₹40 per kg
+    items.put("Banana", new GroceryItem("Banana", 30.0, 30));     // ₹30 per dozen
+    items.put("Orange", new GroceryItem("Orange", 50.0, 40));     // ₹50 per kg
+    items.put("Milk", new GroceryItem("Milk", 60.0, 20));         // ₹60 per liter
+    // Add remaining items similarly...
+}
+```
+
+## Additional Notes
+- Each exception should be handled in the respective methods to display error messages or alert dialogs.
+- UI elements like buttons, labels, and list views can be customized in the FXML files.
 
 ## License
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+This project is licensed under the MIT License.
 
-## Acknowledgments
-- JavaFX documentation
-- Scene Builder documentation
-- OpenJDK community
+---
 
+This README file should help guide developers through creating, setting up, and running the GrocerEase project in IntelliJ.
