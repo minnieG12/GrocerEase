@@ -12,7 +12,6 @@ GrocerEase/
 │   │   ├── MainApp.java
 │   │   ├── WelcomeController.java
 │   │   ├── MainController.java
-│   │   ├── CheckoutThread.java
 │   ├── grocery/
 │   │   ├── Cart.java
 │   │   ├── Customer.java
