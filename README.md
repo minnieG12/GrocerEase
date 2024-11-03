@@ -61,6 +61,7 @@ GrocerEase/
     - `main` (for main application files)
     - `grocery` (for classes related to grocery items and cart functionality)
     - `exceptions` (for custom exceptions)
+    - `threads` (for checkout thread)
     - `resources` (for FXML files)
 3. Right-click each package and select **New > Java Class** to create the necessary classes in each package.
 
@@ -70,7 +71,6 @@ GrocerEase/
     - `MainApp.java`: The entry point for launching the JavaFX application.
     - `WelcomeController.java`: Controls the welcome screen view.
     - `MainController.java`: Manages main interactions, such as adding items to the cart.
-    - `CheckoutThread.java`: Manages checkout operations using multithreading.
 
 - **`grocery` package**:
     - `Cart.java`: Represents a shopping cart.
@@ -82,6 +82,11 @@ GrocerEase/
     - `InsufficientFundsException.java`: Custom exception for insufficient funds.
     - `OutOfStockException.java`: Custom exception for out-of-stock items.
     - `InvalidNameException.java`: Custom exception for invalid item names.
+    - `InvalidPhoneNumberException.java`: Custom exception for invalid phone numbers.
+
+- **`threads` package**:
+    - `CheckoutThread.java`: Manages checkout operations using multithreading.
+
 
 ### 5. **Create FXML Files**
 1. In the `resources` folder, right-click and select **New > File**.
@@ -128,10 +133,11 @@ The `totalLabel` at the bottom of the main screen displays the cart’s current 
 The project includes custom exception handling to ensure data integrity and provide user feedback.
 - `InvalidNameException`: Thrown if the user enters an invalid name (e.g., an empty string).
 - `InvalidPhoneNumberException`: Thrown if the phone number does not meet the required format.
-- `InsufficientFundsException`
-- `OutOfStockException`
+- `InsufficientFundsException`: Thrown if cart value exceeds customer balance.
+- `OutOfStockException`: Thrown if an item is out of stock.
 
 First 2 exceptions are handled in the `WelcomeController`, and any validation error triggers a popup alert with the relevant message.
+Last 2 exceptions are handled in the `MainController`, and any validation error triggers a popup alert with the relevant message.
 
 ## Multi-threading with CheckoutThread
 The `CheckoutThread.java` class handles the checkout process in a separate thread, preventing the UI from freezing during long operations. Upon clicking "Checkout," the thread calculates the total and clears the cart asynchronously, allowing the user to continue interacting with the application.
