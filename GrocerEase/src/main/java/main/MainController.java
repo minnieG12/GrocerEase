@@ -1,10 +1,11 @@
 package main;
 
+import exceptions.InsufficientFundsException;
+import exceptions.OutOfStockException;
 import grocery.Cart;
 import grocery.Customer;
 import grocery.GroceryItem;
 import grocery.Inventory;
-import exceptions.InsufficientFundsException;
 import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
@@ -38,11 +39,24 @@ public class MainController {
     public void onAddToCart() {
         String selectedItem = itemListView.getSelectionModel().getSelectedItem();
         if (selectedItem != null) {
-            GroceryItem item = inventory.getItemByName(selectedItem.split(" ")[0]);
-            if (item != null) {
-                cart.addItem(item, 1);
-                cartListView.getItems().add(item.toString());
-                updateTotalLabel(); // Update total label after adding an item
+            try {
+                // Extract the item name from the selected item string (assuming it's the first part)
+                GroceryItem item = inventory.getItemByName(selectedItem.split(" ")[0]);
+                if (item != null) {
+                    // Check if there is enough stock for the requested quantity (here assumed as 1 item per addition)
+                    int requestedQuantity = 1;
+                    if (item.getQuantity() < requestedQuantity) {
+                        throw new OutOfStockException(item.getName() + " does not have enough stock. Available: " + item.getQuantity());
+                    }
+
+                    // Add item to the cart and update the inventory stock
+                    cart.addItem(item, requestedQuantity);
+                    inventory.reduceItemStock(item.getName(), requestedQuantity); // Reduce stock in inventory
+                    cartListView.getItems().add(item.toString());
+                    updateTotalLabel(); // Update total after adding an item
+                }
+            } catch (OutOfStockException e) {
+                showAlert("Out of Stock", e.getMessage());
             }
         }
     }
@@ -50,10 +64,6 @@ public class MainController {
     @FXML
     public void onCheckout() {
         double totalValue = cart.getTotalValue(); // Calculate total value of the cart
-
-        // Debugging outputs
-        System.out.println("Total Cart Value: " + totalValue);
-        System.out.println("Customer Balance: " + customer.getBalance());
 
         try {
             // Check if the customer has sufficient funds
