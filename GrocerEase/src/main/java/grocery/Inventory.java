@@ -28,6 +28,17 @@ public class Inventory<T extends GroceryItem> {
         return items;
     }
 
+    public void reduceItemStock(String itemName, int quantity) {
+        T item = getItemByName(itemName);
+        if (item != null) {
+            int newQuantity = item.getQuantity() - quantity;
+            if (newQuantity < 0) {
+                throw new IllegalArgumentException(item.getName() + " is out of stock or requested quantity exceeds available stock.");
+            }
+            item.setQuantity(newQuantity);
+        }
+    }
+
     private void initializeStock() {
         // Add 20 items with unique names, prices in rupees, and quantities
         items.add((T) new GroceryItem("Apples", 1.00, 50));
