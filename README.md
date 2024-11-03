@@ -40,7 +40,7 @@ GrocerEase/
 - [Java 11+](https://www.oracle.com/java/technologies/javase-downloads.html)
 - [IntelliJ IDEA](https://www.jetbrains.com/idea/download/)
 - [JavaFX SDK](https://gluonhq.com/products/javafx/) (if not bundled with IntelliJ)
-- [SceneBuilder](https://gluonhq.com/products/scene-builder/) (if not bundled with IntelliJ)
+- [SceneBuilder](https://gluonhq.com/products/scene-builder/)
 
 ## Steps to Create GrocerEase in IntelliJ
 
